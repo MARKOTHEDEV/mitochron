@@ -24,7 +24,7 @@ export default function handler(req, res) {
   if (req.method === "POST") {
     // const {content,name,depart,unit } = req.body as Partial<Team>;
 
-    const newUser = { id: teams.length + 1, ...req.body };
+    const newUser = { id: teams.length + 1, ...req.body.data };
     teams.push(newUser);
 
     return res.status(201).json(newUser);
