@@ -1,9 +1,10 @@
 // import { FaPlus } from "react-icons/fa";
-import { createTeamsApi } from "@/api/endpoints/teams";
+import { createTeamsApi, getTeamsApi } from "@/api/endpoints/teams";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import useStore, { Team } from "@/store";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { AiOutlinePlus } from "react-icons/ai";
 import { toast } from "sonner";
 
@@ -115,7 +116,7 @@ const CreateDepart = ({ onCreate }: { onCreate: () => void }) => {
 };
 
 const Home = () => {
-  const { teams, addTeam } = useStore();
+  const { teams, addTeam, addTeams } = useStore();
 
   console.log({ teams });
   const { isPending, mutate } = useMutation({
@@ -130,25 +131,44 @@ const Home = () => {
       toast.error("Something went wrong");
     },
   });
+  const { data, isLoading } = useQuery({
+    queryKey: ["getTeamsApi"],
+    queryFn: getTeamsApi,
+    refetchOnWindowFocus: false,
+    refetchInterval: false,
+    retry: 1,
+    refetchOnMount: false,
+  });
+
+  useEffect(() => {
+    if (data) {
+      addTeams(data);
+    }
+  }, [data]);
   return (
     <div className="p-[24px] grid grid-cols-3 gap-[24px] ">
-      {/* <TeamCard
-        content={`But now you can use Material's dynamic color feature to automatically generate accessible colors assigned to each "number."`}
-        name="Design Team"
-        depart={1}
-        unit={2}
-        img="/3d_avatar_21.png"
-      />
-      <TeamCard
-        content={`But now you can use Material's dynamic color feature to automatically generate accessible colors assigned to each "number."`}
-        name="Design Team"
-        depart={1}
-        unit={2}
-        img="/3d_avatar_21.png"
-        colorVariant="yellow"
-      />
-    
-     */}
+      {isLoading ? (
+        <>
+          <LoadingCard /> <LoadingCard /> <LoadingCard />
+        </>
+      ) : (
+        ""
+      )}
+
+      {teams?.map((item, index) => (
+        <TeamCard
+          key={index}
+          content={item.content}
+          name={item.name}
+          depart={item.depart}
+          unit={item.unit}
+          img="/3d_avatar_21.png"
+          colorVariant={index % 1 == 0 ? "yellow" : "blue"}
+        />
+      ))}
+
+      {isPending ? <LoadingCard /> : ""}
+
       <CreateDepart
         onCreate={() => {
           mutate({
@@ -159,19 +179,6 @@ const Home = () => {
           });
         }}
       />
-      {teams?.map((item, index) => (
-        <TeamCard
-          key={index}
-          content={item.content}
-          name={item.name}
-          depart={item.depart}
-          unit={item.unit}
-          img="/3d_avatar_21.png"
-          colorVariant={index % 1 == 2 ? "yellow" : "blue"}
-        />
-      ))}
-
-      {isPending ? <LoadingCard /> : ""}
     </div>
   );
 };

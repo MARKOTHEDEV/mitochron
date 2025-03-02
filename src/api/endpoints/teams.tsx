@@ -12,5 +12,5 @@ export const createTeamsApi = async (data: Team): Promise<Team[]> => {
   const resp = await apiInstance.post("/teams", {
     data,
   });
-  return resp.data;
+  return resp?.data?.data;
 };
