@@ -9,7 +9,7 @@ interface Team {
 }
 
 // In-memory storage (resets on function restart)
-export const teams: Team[] = [
+const teams: Team[] = [
   {
     content: `But now you can use Material's dynamic color feature to automatically generate accessible colors assigned to each "number."`,
     name: "Design Team",
@@ -24,7 +24,7 @@ export const teams: Team[] = [
   },
 ];
 
-export default function handler(req: VercelRequest, res: VercelResponse) {
+module.exports = function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === "GET") {
     return res.status(200).json(teams);
   }
@@ -39,4 +39,4 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   return res.status(405).json({ error: "Method Not Allowed" });
-}
+};
