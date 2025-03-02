@@ -1,6 +1,11 @@
 import { MdOutlineChat } from "react-icons/md";
 import { FaRegBell } from "react-icons/fa";
 import { useSearchParams } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { useState } from "react";
+import { RiCloseLargeFill } from "react-icons/ri";
+import CustomDrawer from "./CustomerDrawer";
 // import { RxDashboard } from "react-icons/rx";
 // import { MdOutlineAccountTree } from "react-icons/md";
 // import { MdAccountBalance } from "react-icons/md";
@@ -50,8 +55,9 @@ const NavLinks = () => {
     setSearchParams({ maintab: routeName });
   };
   return (
+    //  w-[769px]
     // 850px
-    <div className="bg-gray px-[22px] py-[14px] rounded-[24px] flex items-center justify-between w-[769px] h-[76px]">
+    <div className="bg-gray px-[22px] py-[14px] rounded-[24px] flex flex-wrap w-[100%]   items-center justify-between md:h-[76px]  md:w-[769px] md:flex-nowrap">
       {links.map((d, index) => (
         <div
           className={`cursor-pointer flex items-center justify-center gap-[8px]  px-[21px] h-[60px] rounded-[16px] text-nowrap hover:hover: ${
@@ -71,21 +77,46 @@ const NavLinks = () => {
 };
 
 const Nav = () => {
-  // const
+  const isTabletOrMobile = useMediaQuery({ query: "(max-width: 1224px)" });
+  const [open, setOpen] = useState(false);
   return (
     <div className="border-b-[1px] border-b-[#C0C9C0] ">
-      <div className="px-[48.5px] py-[21px] flex items-center justify-between">
+      <div className="px-2 py-4 md:px-[48.5px] md:py-[21px] flex items-center justify-between">
         <div className="flex items-center gap-[48px]">
-          <img src="/vendallogo.png" className="block w-[177px]" alt="" />
-          {/* <div></div> */}
-          <NavLinks />
+          <img src="/vendallogo.png" className="block md:w-[177px]" alt="" />
+          {!isTabletOrMobile ? <NavLinks /> : ""}
         </div>
 
         <div className="flex gap-[16px]">
-          <NavIcons icon={<FaRegBell size={21} />} />
-          <NavIcons icon={<MdOutlineChat size={21} />} />
+          {isTabletOrMobile ? (
+            <NavIcons
+              icon={
+                <div
+                  onClick={() => {
+                    setOpen(!open);
+                  }}
+                  className="cursor-pointer"
+                >
+                  {!open ? (
+                    <GiHamburgerMenu size={30} />
+                  ) : (
+                    <RiCloseLargeFill size={30} />
+                  )}
+                </div>
+              }
+            />
+          ) : (
+            <>
+              <NavIcons icon={<FaRegBell size={21} />} />
+              <NavIcons icon={<MdOutlineChat size={21} />} />
+            </>
+          )}
         </div>
       </div>
+
+      <CustomDrawer open={open} setOpen={setOpen}>
+        <NavLinks />
+      </CustomDrawer>
     </div>
   );
 };
