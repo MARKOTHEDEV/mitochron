@@ -1,5 +1,6 @@
 // import { FaPlus } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { AiOutlinePlus } from "react-icons/ai";
 
 type TeamCardProp = {
@@ -56,7 +57,36 @@ const TeamCard = ({
     </div>
   );
 };
+const LoadingCard = () => {
+  return (
+    <Skeleton
+      className={`w-[310px] rounded-[24px] px-[15px] py-[16px] flex flex-col  justify-between h-[271px]`}
+      // style={{ backgroundColor: bodyColor }}
+    >
+      <Skeleton
+        className={` px-[16px] py-[12px] rounded-[12px] min-h-[161px]`}
+        // style={{
+        //   backgroundColor: contentColor,
+        // }}
+      ></Skeleton>
 
+      <div className="flex items-center justify-between">
+        <div className="flex flex-col gap-[12px] ">
+          <Skeleton className="w-[40px] h-[20px]" />
+
+          <div className="flex items-center gap-[8px] text-[14px]">
+            {/* <p>1 Department</p> */}
+            <Skeleton className="w-[80px] h-[20px]" />
+
+            <div className="w-[3.73px] h-[3.73px] bg-primary rounded" />
+            <Skeleton className="w-[40px] h-[20px]" />
+          </div>
+        </div>
+        <Skeleton className="w-[40px] h-[40px] rounded-[50%]" />
+      </div>
+    </Skeleton>
+  );
+};
 const CreateDepart = () => {
   return (
     <div className="rounded-[24px] bg-[#F3F4EF] w-[310px] h-[271px] p-[1rem] flex flex-col items-center justify-between">
@@ -94,6 +124,7 @@ const Home = () => {
         colorVariant="yellow"
       />
       <CreateDepart />
+      <LoadingCard />
     </div>
   );
 };
