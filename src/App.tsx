@@ -1,8 +1,10 @@
+import DashboardLayout from "./components/layout/DashboardLayout";
+
 function App() {
   return (
-    <>
-      <h1 className="text-[red]">Hajimemashou!</h1>
-    </>
+    <DashboardLayout>
+      <h1>Hello world welcome to art by markothedev</h1>
+    </DashboardLayout>
   );
 }
 
