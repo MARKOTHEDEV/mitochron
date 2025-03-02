@@ -85,7 +85,7 @@ const Links = () => (
 );
 const SideBar = () => {
   return (
-    <div className="w-[416px] border-r-[1px] border-r-[#C0C9C0] overflow-y-scroll">
+    <div className="w-[100%]  border-r-[1px] overflow-y-scroll md:w-[416px] md:border-r-[#C0C9C0] ">
       <div className="pb-[32px]  pt-[24px] pl-[47px] pr-[24.5px] flex flex-col gap-[24px]">
         <Brody />
         <Teams />
