@@ -7,16 +7,21 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import DashboardLayout from "./components/layout/DashboardLayout.tsx";
 import Home from "./Page/Home.tsx";
 import BudgetRoom from "./Page/BudgetRoom.tsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <DashboardLayout>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/budget-room" element={<BudgetRoom />} />
+          <Route element={<DashboardLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/budget-room" element={<BudgetRoom />} />
+          </Route>
         </Routes>
-      </DashboardLayout>
-    </BrowserRouter>
+      </BrowserRouter>
+    </QueryClientProvider>
   </StrictMode>
 );

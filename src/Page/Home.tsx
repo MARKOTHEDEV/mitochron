@@ -1,6 +1,7 @@
 // import { FaPlus } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import useStore from "@/store";
 import { AiOutlinePlus } from "react-icons/ai";
 
 type TeamCardProp = {
@@ -106,6 +107,9 @@ const CreateDepart = () => {
 };
 
 const Home = () => {
+  const { teams, addTeam } = useStore();
+
+  console.log({ teams });
   return (
     <div className="p-[24px] grid grid-cols-3 gap-[24px] ">
       <TeamCard
