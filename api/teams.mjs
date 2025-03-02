@@ -5,12 +5,14 @@ const teams = [
     name: "Design Team",
     depart: 2,
     unit: 3,
+    id: 1,
   },
   {
     content: `But now you can use Material's dynamic color feature to automatically generate accessible colors assigned to each "number."`,
     name: "Design Team",
     depart: 1,
     unit: 2,
+    id: 2,
   },
 ];
 

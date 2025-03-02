@@ -8,13 +8,9 @@ export const getTeamsApi = async (): Promise<Team[]> => {
   return resp.data;
 };
 
-export const createTeamsApi = async ({
-  newTeam,
-}: {
-  newTeam: Team;
-}): Promise<Team[]> => {
+export const createTeamsApi = async (data: Team): Promise<Team[]> => {
   const resp = await apiInstance.post("/teams", {
-    data: newTeam,
+    data,
   });
   return resp.data;
 };

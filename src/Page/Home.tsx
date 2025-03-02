@@ -1,8 +1,11 @@
 // import { FaPlus } from "react-icons/fa";
+import { createTeamsApi } from "@/api/endpoints/teams";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import useStore from "@/store";
+import useStore, { Team } from "@/store";
+import { useMutation } from "@tanstack/react-query";
 import { AiOutlinePlus } from "react-icons/ai";
+import { toast } from "sonner";
 
 type TeamCardProp = {
   content: string;
@@ -88,9 +91,14 @@ const LoadingCard = () => {
     </Skeleton>
   );
 };
-const CreateDepart = () => {
+const CreateDepart = ({ onCreate }: { onCreate: () => void }) => {
   return (
-    <div className="rounded-[24px] bg-[#F3F4EF] w-[310px] h-[271px] p-[1rem] flex flex-col items-center justify-between">
+    <div
+      className="cursor-pointer rounded-[24px] bg-[#F3F4EF] w-[310px] h-[271px] p-[1rem] flex flex-col items-center justify-between"
+      onClick={() => {
+        onCreate();
+      }}
+    >
       <div />
       <div className="bg-[#FFFFFF] w-[88px] h-[88px] rounded-[50%] flex items-center justify-center">
         <div className=" w-[72px] h-[72px] bg-primary rounded-[50%] flex items-center justify-center">
@@ -110,9 +118,19 @@ const Home = () => {
   const { teams, addTeam } = useStore();
 
   console.log({ teams });
+  const { isPending, mutate } = useMutation({
+    mutationFn: createTeamsApi,
+    onSuccess: (newTeam: Team) => {
+      toast.success("Team Created!");
+      addTeam(newTeam);
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+    },
+  });
   return (
     <div className="p-[24px] grid grid-cols-3 gap-[24px] ">
-      <TeamCard
+      {/* <TeamCard
         content={`But now you can use Material's dynamic color feature to automatically generate accessible colors assigned to each "number."`}
         name="Design Team"
         depart={1}
@@ -127,8 +145,31 @@ const Home = () => {
         img="/3d_avatar_21.png"
         colorVariant="yellow"
       />
-      <CreateDepart />
-      <LoadingCard />
+    
+     */}
+      <CreateDepart
+        onCreate={() => {
+          mutate({
+            content: `But now you can use Material's dynamic color feature to automatically generate accessible colors assigned to each "number."`,
+            name: "Design Team",
+            depart: 1,
+            unit: 2,
+          });
+        }}
+      />
+      {teams?.map((item, index) => (
+        <TeamCard
+          key={index}
+          content={item.content}
+          name={item.name}
+          depart={item.depart}
+          unit={item.unit}
+          img="/3d_avatar_21.png"
+          colorVariant={index % 1 == 2 ? "yellow" : "blue"}
+        />
+      ))}
+
+      {isPending ? <LoadingCard /> : ""}
     </div>
   );
 };
