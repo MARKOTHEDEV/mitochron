@@ -26,15 +26,20 @@ const DashboardLayout = ({ children }: Prop) => {
 
           <div
             onClick={handleMobileProfile}
-            className="cursor-pointer absolute bottom-12 right-12 w-[45px] h-[45px] bg-primary rounded-[50%] text-white flex items-center justify-center cursor-pointer md:hidden"
+            className="cursor-pointer absolute bottom-30 right-8 w-[45px] h-[45px] bg-primary rounded-[50%] text-white flex items-center justify-center cursor-pointer md:hidden"
           >
             <FaUserLarge />
           </div>
         </main>
       </div>
 
-      <CustomDrawer direction="left" open={open} setOpen={setOpen}>
-        <div>
+      <CustomDrawer
+        className="!w-[406px]"
+        direction="left"
+        open={open}
+        setOpen={setOpen}
+      >
+        <div className="w-[100%] flex flex-col items-center justify-center bg-white">
           <RiCloseLargeFill
             size={30}
             className="block ml-auto translate-x-[-40px] translate-y-[10px] cursor-pointer "
@@ -42,7 +47,9 @@ const DashboardLayout = ({ children }: Prop) => {
               setOpen(false);
             }}
           />
-          <SideBar />
+          <div>
+            <SideBar />
+          </div>
         </div>
       </CustomDrawer>
     </div>
