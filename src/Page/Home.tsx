@@ -119,6 +119,8 @@ const Home = () => {
 
   console.log({ teams });
   const { isPending, mutate } = useMutation({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     mutationFn: createTeamsApi,
     onSuccess: (newTeam: Team) => {
       toast.success("Team Created!");
