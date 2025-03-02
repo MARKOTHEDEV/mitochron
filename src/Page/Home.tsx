@@ -118,7 +118,6 @@ const CreateDepart = ({ onCreate }: { onCreate: () => void }) => {
 const Home = () => {
   const { teams, addTeam, addTeams } = useStore();
 
-  console.log({ teams });
   const { isPending, mutate } = useMutation({
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -146,7 +145,7 @@ const Home = () => {
     }
   }, [data]);
   return (
-    <div className="p-[24px] grid grid-cols-3 gap-[24px] ">
+    <div className="p-[24px] flex flex-col items-center justify-center md:grid md:grid-cols-3 gap-[24px] ">
       {isLoading ? (
         <>
           <LoadingCard /> <LoadingCard /> <LoadingCard />
@@ -163,7 +162,7 @@ const Home = () => {
           depart={item.depart}
           unit={item.unit}
           img="/3d_avatar_21.png"
-          colorVariant={index % 1 == 0 ? "yellow" : "blue"}
+          colorVariant={index % 2 == 0 ? "yellow" : "blue"}
         />
       ))}
 
