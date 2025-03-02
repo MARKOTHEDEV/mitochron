@@ -1,5 +1,3 @@
-import { VercelRequest, VercelResponse } from "@vercel/node";
-
 // In-memory storage (resets on function restart)
 const teams = [
   {
