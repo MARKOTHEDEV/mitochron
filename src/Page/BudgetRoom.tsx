@@ -1,4 +1,4 @@
 const BudgetRoom = () => {
-  return <div>BudgetRoom</div>;
+  return <div></div>;
 };
 export default BudgetRoom;

@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }: Prop) => {
         {!isTabletOrMobile ? <SideBar /> : ""}
         <main
           className={`${
-            isTabletOrMobile ? "relative border-[1px] w-[100%]" : ""
+            isTabletOrMobile ? "relative  w-[100%]" : "md:w-[1000px] "
           }`}
         >
           {children}
