@@ -34,12 +34,12 @@ const DashboardLayout = ({ children }: Prop) => {
       </div>
 
       <CustomDrawer
-        className="!w-[406px]"
+        className="!w-[400px]  !h-[100vh]  overflow-scroll"
         direction="left"
         open={open}
         setOpen={setOpen}
       >
-        <div className="w-[100%] flex flex-col items-center justify-center bg-white">
+        <div className="w-[100%] flex flex-col items-center justify-center bg-white   ">
           <RiCloseLargeFill
             size={30}
             className="block ml-auto translate-x-[-40px] translate-y-[10px] cursor-pointer "
@@ -47,7 +47,7 @@ const DashboardLayout = ({ children }: Prop) => {
               setOpen(false);
             }}
           />
-          <div>
+          <div className=" ">
             <SideBar />
           </div>
         </div>
