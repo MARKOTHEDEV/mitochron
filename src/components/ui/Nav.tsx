@@ -24,21 +24,21 @@ const NavLinks = () => {
     {
       name: "Dashboard",
       //   icon: <RxDashboard size={24} color="#252624" />,
-      icon: <img src="/grid_view.png" className="block w-[24px]" />,
+      icon: <img src="/grid_view.svg" className="block w-[24px]" />,
 
       link: "/",
     },
     {
       name: "Approval workflow",
       //   icon: <MdOutlineAccountTree size={24} color="#252624" />,
-      icon: <img src="/account_tree.png" className="block w-[24px]" />,
+      icon: <img src="/account_tree.svg" className="block w-[24px]" />,
 
       link: "/workflow",
     },
     {
       name: "Buget room",
       //   icon: <MdAccountBalance size={24} color="#252624" />,
-      icon: <img src="/account_balance.png" className="block w-[24px]" />,
+      icon: <img src="/account_balance.svg" className="block w-[24px]" />,
 
       link: "/room",
     },

@@ -1,4 +1,5 @@
 // In-memory storage (resets on function restart)
+// this is just a serverless function to help simulate api
 const teams = [
   {
     content: `But now you can use Material's dynamic color feature to automatically generate accessible colors assigned to each "number."`,
