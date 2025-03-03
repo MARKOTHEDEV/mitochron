@@ -8,6 +8,7 @@ import Home from "./Page/Home.tsx";
 import BudgetRoom from "./Page/BudgetRoom.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import DashboardLayout from "./components/layout/DashboardLayout.tsx";
+import NotFoundPage from "./Page/NotFound.tsx";
 
 const queryClient = new QueryClient();
 
@@ -19,7 +20,8 @@ createRoot(document.getElementById("root")!).render(
         <DashboardLayout>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/budget-room" element={<BudgetRoom />} />
+            <Route path="/room" element={<BudgetRoom />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </DashboardLayout>
       </BrowserRouter>

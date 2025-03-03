@@ -1,11 +1,11 @@
 import { MdOutlineChat } from "react-icons/md";
 import { FaRegBell } from "react-icons/fa";
-import { useSearchParams } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { useState } from "react";
 import { RiCloseLargeFill } from "react-icons/ri";
 import CustomDrawer from "./CustomerDrawer";
+import { NavLink as Link } from "react-router-dom";
 // import { RxDashboard } from "react-icons/rx";
 // import { MdOutlineAccountTree } from "react-icons/md";
 // import { MdAccountBalance } from "react-icons/md";
@@ -26,51 +26,49 @@ const NavLinks = () => {
       //   icon: <RxDashboard size={24} color="#252624" />,
       icon: <img src="/grid_view.png" className="block w-[24px]" />,
 
-      link: "dashbaord",
+      link: "/",
     },
     {
       name: "Approval workflow",
       //   icon: <MdOutlineAccountTree size={24} color="#252624" />,
       icon: <img src="/account_tree.png" className="block w-[24px]" />,
 
-      link: "workflow",
+      link: "/workflow",
     },
     {
       name: "Buget room",
       //   icon: <MdAccountBalance size={24} color="#252624" />,
       icon: <img src="/account_balance.png" className="block w-[24px]" />,
 
-      link: "room",
+      link: "/room",
     },
     {
       name: "Analytics",
       icon: <img src="/monitoring.svg" className="block w-[24px]" />,
-      link: "analytics",
+      link: "/analytics",
     },
   ];
 
-  const [searchParams, setSearchParams] = useSearchParams();
-  // Set a query parameter
-  const setQueryParam = (routeName: string) => {
-    setSearchParams({ maintab: routeName });
-  };
   return (
     //  w-[769px]
     // 850px
     <div className="bg-gray px-[22px] py-[14px] rounded-[24px] flex flex-wrap w-[100%]   items-center justify-between md:h-[76px]  md:w-[769px] md:flex-nowrap">
       {links.map((d, index) => (
-        <div
-          className={`cursor-pointer flex items-center justify-center gap-[8px]  px-[21px] h-[60px] rounded-[16px] text-nowrap hover:hover: ${
-            d?.link == searchParams.get("maintab") ? "bg-white" : ""
-          } `}
+        <Link
+          // className={`cursor-pointer flex items-center justify-center gap-[8px]  px-[21px] h-[60px] rounded-[16px] text-nowrap hover:hover: ${
+          //   d?.link == searchParams.get("maintab") ? "bg-white" : ""
+          // } `}
+          className={(props) => `
+            cursor-pointer flex items-center justify-center gap-[8px]  px-[21px] h-[60px] rounded-[16px] text-nowrap hover:hover: ${
+              props.isActive ? "bg-white" : ""
+            } 
+            `}
+          to={d.link}
           key={index}
-          onClick={() => {
-            setQueryParam(d.link);
-          }}
         >
           {d.icon}
           <p className="text-primary text-[18px] font-[500]">{d.name}</p>
-        </div>
+        </Link>
       ))}
     </div>
   );

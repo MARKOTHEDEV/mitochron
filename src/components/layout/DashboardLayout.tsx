@@ -19,7 +19,7 @@ const DashboardLayout = ({ children }: Prop) => {
         {!isTabletOrMobile ? <SideBar /> : ""}
         <main
           className={`${
-            isTabletOrMobile ? "relative  w-[100%]" : "md:w-[1000px] "
+            isTabletOrMobile ? "relative  w-[100%]" : "md:w-[100%] "
           } h-[90vh] overflow-y-scroll`}
         >
           {children}
